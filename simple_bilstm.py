@@ -186,7 +186,7 @@ def epoch_time(start_time, end_time):
 
 
 if __name__ == '__main__':
-    PREDICT = True
+    PREDICT = False
 
     # hyperparameters
     DROPOUT = 0.2
@@ -218,7 +218,7 @@ if __name__ == '__main__':
 
     if PREDICT:
         model.load_state_dict(torch.load("weather_content.pt"))
-        pred_data = load_pred_data("data/nebraska_tweets.csv")
+        pred_data = load_pred_data("data/nebraska_tweets_0323-0327.csv")
         PREDTEXT.vocab = TEXT.vocab
         pred_iterator = tt.data.BucketIterator(
             pred_data,
@@ -234,9 +234,9 @@ if __name__ == '__main__':
                 preds = [LABEL.vocab.itos[pred] for pred in preds]
                 predictions += preds
 
-        df = pd.read_csv("data/nebraska_tweets.csv")
+        df = pd.read_csv("data/nebraska_tweets_0323-0327.csv")
         df['content_label'] = predictions
-        df.to_csv("data/nebraska_tweets.csv")
+        df.to_csv("data/nebraska_tweets_0323-0327.csv")
 
     else:
         # train model
