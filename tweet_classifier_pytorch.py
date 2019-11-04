@@ -17,7 +17,7 @@ torch.backends.cudnn.deterministic = True
 
 
 def load_california_earthquake_data():
-    df = pd.read_csv('CrisisNLP_labeled_data_crowdflower/2014_California_Earthquake/2014_california_eq.csv')
+    df = pd.read_csv('data/CrisisNLP_labeled_data_crowdflower/2014_California_Earthquake/2014_california_eq.csv')
 
     labels = df['choose_one_category'].unique().tolist()
     df['label'] = pd.to_numeric(df.choose_one_category.astype("category", categories=labels).cat.codes, downcast='unsigned')
